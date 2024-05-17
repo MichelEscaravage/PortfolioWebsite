@@ -4,13 +4,42 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <script src="https://kit.fontawesome.com/a266f63b1a.js" crossorigin="anonymous"></script>
         {% block stylesheets %}
+
         {% endblock %}
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+    <header id="base_header">
+        <div class="nav">
+            <a href="{{ path('app_index') }}"><i class="fa-sharp fa-solid fa-house"></i> Homepage</a>
+            <a href="{{ path('app_projects') }}">Projects</a>
+            <a href="{{ path('app_aboutme') }}">About Me</a>
+            <button class="linkedin" onclick="window.location.href = 'https://www.linkedin.com/in/michel-escaravage-81896b268/'"></button>
+        </div>
+
+        <div class="small_nav">
+            {% set routeName = app.request.attributes.get('_route') %}
+            {% if routeName == 'app_index' %}
+                <a href="{{ path('app_index') }}"><i class="fa-sharp fa-solid fa-house"></i></a>
+                <button class="linkedin" onclick="window.location.href = 'https://www.linkedin.com/in/michel-escaravage-81896b268/'"></button>
+                <a href="{{ path('app_projects') }}"><i class="fa-solid fa-arrow-right"></i></a>
+            {% elseif routeName == 'app_projects' %}
+                <a href="{{ path('app_index') }}"><i class="fa-sharp fa-solid fa-house"></i></a>
+                <button class="linkedin" onclick="window.location.href = 'https://www.linkedin.com/in/michel-escaravage-81896b268/'"></button>
+                <a href="{{ path('app_aboutme') }}"><i class="fa-solid fa-arrow-right"></i></a>
+            {% elseif routeName == 'app_aboutme' %}
+                <a href="{{ path('app_index') }}"><i class="fa-sharp fa-solid fa-house"></i></a>
+                <button class="linkedin" onclick="window.location.href = 'https://www.linkedin.com/in/michel-escaravage-81896b268/'"></button>
+
+
+            {% endif %}
+        </div>
+
+    </header>
     <body>
         {% block body %}{% endblock %}
     </body>
